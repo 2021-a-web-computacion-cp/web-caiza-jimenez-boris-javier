@@ -35,12 +35,12 @@ export class AppController {
       @Res({passthrough: true}) res,
   ){
 
-    var resultado = parseInt(queryParams.numeroUno) + parseInt(queryParams.numeroDos);
+    var resultado = Number(queryParams.numeroUno) + Number(queryParams.numeroDos);
     var sinFirmar = req.cookies;
     var valor = sinFirmar["valor"];
 
     if(valor != undefined){
-      var valor_nuevo = parseInt(valor) - resultado;
+      var valor_nuevo = Number(valor) - resultado;
       res.cookie('valor', valor_nuevo,);
       if(valor_nuevo < 0){
         res.cookie('valor', 100,);
@@ -71,12 +71,12 @@ export class AppController {
       @Req() req,
       @Res({passthrough: true}) res,
   ){
-    var resultado = parseInt(bodyParams.numeroUno) - parseInt(bodyParams.numeroDos);
+    var resultado = Number(bodyParams.numeroUno) - Number(bodyParams.numeroDos);
     res.header("Valor",resultado);
     var sinFirmar = req.cookies;
     var valor = sinFirmar["valor"];
     if(valor != undefined){
-      var valor_nuevo = parseInt(valor) - resultado;
+      var valor_nuevo = Number(valor) - resultado;
       res.cookie('valor', valor_nuevo,);
       if(valor_nuevo < 0){
         res.cookie('valor', 100,);
@@ -104,11 +104,11 @@ export class AppController {
       @Req() req,
       @Res({passthrough: true}) res,
   ) {
-    var resultado = parseInt(params.numeroUno) * parseInt(params.numeroDos);
+    var resultado = Number(params.numeroUno) * Number(params.numeroDos);
     var sinFirmar = req.cookies;
     var valor = sinFirmar["valor"];
     if(valor != undefined){
-      var valor_nuevo = parseInt(valor) - resultado;
+      var valor_nuevo = Number(valor) - resultado;
       res.cookie('valor', valor_nuevo,);
       if(valor_nuevo < 0){
         res.cookie('valor', 100,);
@@ -137,11 +137,11 @@ export class AppController {
       @Req() req,
       @Res({passthrough: true}) res,
   ){
-    var resultado = parseInt(headers.numerouno) / parseInt(headers.numerodos);
+    var resultado = Number(headers.numerouno) / Number(headers.numerodos);
     var sinFirmar = req.cookies;
     var valor = sinFirmar["valor"];
     if(valor != undefined){
-      var valor_nuevo = parseInt(valor) - resultado;
+      var valor_nuevo = Number(valor) - resultado;
       res.cookie('valor', valor_nuevo,);
       if(valor_nuevo < 0){
         res.cookie('valor', 100,);
