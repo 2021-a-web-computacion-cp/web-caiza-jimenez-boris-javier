@@ -28,9 +28,9 @@ let AppController = class AppController {
         var valor = sinFirmar["valor"];
         if (valor != undefined) {
             var valor_nuevo = Number(valor) - resultado;
-            res.cookie('valor', valor_nuevo);
+            res.cookie('valor', valor_nuevo, { signed: true, });
             if (valor_nuevo < 0) {
-                res.cookie('valor', 100);
+                res.cookie('valor', 100, { signed: true, });
                 return "Ha ganadao resetearemso el valor de la cookie a 100";
             }
             else {
@@ -38,7 +38,7 @@ let AppController = class AppController {
             }
         }
         else {
-            res.cookie('valor', 100);
+            res.cookie('valor', 100, { signed: true, });
             res.send('Se ha creado la cookie con un valor de 100, ya que no se ha encontrado una anteriormente, Intente de nuevo');
         }
     }
@@ -49,9 +49,9 @@ let AppController = class AppController {
         var valor = sinFirmar["valor"];
         if (valor != undefined) {
             var valor_nuevo = Number(valor) - resultado;
-            res.cookie('valor', valor_nuevo);
+            res.cookie('valor', valor_nuevo, { signed: true, });
             if (valor_nuevo < 0) {
-                res.cookie('valor', 100);
+                res.cookie('valor', 100, { signed: true, });
                 return "Ha ganadao resetearemso el valor de la cookie a 100";
             }
             else {
@@ -59,7 +59,7 @@ let AppController = class AppController {
             }
         }
         else {
-            res.cookie('valor', 100);
+            res.cookie('valor', 100, { signed: true, });
             res.send('Se ha creado la cookie con un valor de 100, ya que no se ha encontrado una anteriormente, Intente de nuevo');
         }
     }
@@ -69,9 +69,9 @@ let AppController = class AppController {
         var valor = sinFirmar["valor"];
         if (valor != undefined) {
             var valor_nuevo = Number(valor) - resultado;
-            res.cookie('valor', valor_nuevo);
+            res.cookie('valor', valor_nuevo, { signed: true, });
             if (valor_nuevo < 0) {
-                res.cookie('valor', 100);
+                res.cookie('valor', 100, { signed: true, });
                 return "Ha ganadao resetearemso el valor de la cookie a 100";
             }
             else {
@@ -79,7 +79,7 @@ let AppController = class AppController {
             }
         }
         else {
-            res.cookie('valor', 100);
+            res.cookie('valor', 100, { signed: true, });
             res.send('Se ha creado la cookie con un valor de 100, ya que no se ha encontrado una anteriormente, Intente de nuevo');
         }
     }
@@ -89,9 +89,9 @@ let AppController = class AppController {
         var valor = sinFirmar["valor"];
         if (valor != undefined) {
             var valor_nuevo = Number(valor) - resultado;
-            res.cookie('valor', valor_nuevo);
+            res.cookie('valor', valor_nuevo, { signed: true, });
             if (valor_nuevo < 0) {
-                res.cookie('valor', 100);
+                res.cookie('valor', 100, { signed: true, });
                 return "Ha ganadao resetearemso el valor de la cookie a 100";
             }
             else {
@@ -99,7 +99,7 @@ let AppController = class AppController {
             }
         }
         else {
-            res.cookie('valor', 100);
+            res.cookie('valor', 100, { signed: true, });
             res.send('Se ha creado la cookie con un valor de 100, ya que no se ha encontrado una anteriormente, Intente de nuevo');
         }
     }
