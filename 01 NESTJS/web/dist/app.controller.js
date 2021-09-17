@@ -24,8 +24,8 @@ let AppController = class AppController {
     }
     sumar(queryParams, req, res) {
         var resultado = Number(queryParams.numeroUno) + Number(queryParams.numeroDos);
-        var sinFirmar = req.cookies;
-        var valor = sinFirmar["valor"];
+        var Firmar = req.signedCookies;
+        var valor = Firmar["valor"];
         if (valor != undefined) {
             var valor_nuevo = Number(valor) - resultado;
             res.cookie('valor', valor_nuevo, { signed: true, });
@@ -44,9 +44,9 @@ let AppController = class AppController {
     }
     restar(bodyParams, headers, req, res) {
         var resultado = Number(bodyParams.numeroUno) - Number(bodyParams.numeroDos);
-        res.header("Valor", resultado);
-        var sinFirmar = req.cookies;
-        var valor = sinFirmar["valor"];
+        res.header("Result", resultado);
+        var Firmar = req.signedCookies;
+        var valor = Firmar["valor"];
         if (valor != undefined) {
             var valor_nuevo = Number(valor) - resultado;
             res.cookie('valor', valor_nuevo, { signed: true, });
@@ -55,18 +55,18 @@ let AppController = class AppController {
                 return "Ha ganadao resetearemso el valor de la cookie a 100";
             }
             else {
-                return "El valor de la suma es igual a " + resultado + " te quedan: " + valor_nuevo + " puntos";
+                return "El valor de la resta es igual a " + resultado + " te quedan: " + valor_nuevo + " puntos";
             }
         }
         else {
             res.cookie('valor', 100, { signed: true, });
-            res.send('Se ha creado la cookie con un valor de 100, ya que no se ha encontrado una anteriormente, Intente de nuevo');
+            res.send('Se ha creado la cookie con un valor de 100, ya que no se ha encontrado una anteriormente, Intente de nuevo' + valor);
         }
     }
     multiplicar(params, req, res) {
         var resultado = Number(params.numeroUno) * Number(params.numeroDos);
-        var sinFirmar = req.cookies;
-        var valor = sinFirmar["valor"];
+        var Firmar = req.signedCookies;
+        var valor = Firmar["valor"];
         if (valor != undefined) {
             var valor_nuevo = Number(valor) - resultado;
             res.cookie('valor', valor_nuevo, { signed: true, });
@@ -75,7 +75,7 @@ let AppController = class AppController {
                 return "Ha ganadao resetearemso el valor de la cookie a 100";
             }
             else {
-                return "El valor de la suma es igual a " + resultado + " te quedan: " + valor_nuevo + " puntos";
+                return "El valor de la multiplicacion es igual a " + resultado + " te quedan: " + valor_nuevo + " puntos";
             }
         }
         else {
@@ -85,8 +85,8 @@ let AppController = class AppController {
     }
     dividir(headers, req, res) {
         var resultado = Number(headers.numerouno) / Number(headers.numerodos);
-        var sinFirmar = req.cookies;
-        var valor = sinFirmar["valor"];
+        var Firmar = req.signedCookies;
+        var valor = Firmar["valor"];
         if (valor != undefined) {
             var valor_nuevo = Number(valor) - resultado;
             res.cookie('valor', valor_nuevo, { signed: true, });
@@ -95,7 +95,7 @@ let AppController = class AppController {
                 return "Ha ganadao resetearemso el valor de la cookie a 100";
             }
             else {
-                return "El valor de la suma es igual a " + resultado + " te quedan: " + valor_nuevo + " puntos";
+                return "El valor de la divison es igual a " + resultado + " te quedan: " + valor_nuevo + " puntos";
             }
         }
         else {
