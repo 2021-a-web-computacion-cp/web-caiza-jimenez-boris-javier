@@ -26,12 +26,16 @@ export class UsuarioController {
     ) {}
 
 
-    @Get('lista-usuarios')
-    listaUsuarios(
-        @Res() response
-    ){
-        response.render("inicio");
+    @Get('inicio')
+    inicio(@Res() response) {
+        response.render('inicio');
     }
+
+    @Get('lista-usuarios')
+    listaUsuarios(@Res() response) {
+        response.render('usuario/lista');
+    }
+
 
 
 
