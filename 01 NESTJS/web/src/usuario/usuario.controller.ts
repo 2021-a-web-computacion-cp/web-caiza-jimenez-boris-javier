@@ -8,7 +8,7 @@ import {
     InternalServerErrorException,
     Param,
     Post,
-    Put, Res
+    Put, Query, Res
 } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { Prisma } from '@prisma/client';
@@ -25,6 +25,42 @@ export class UsuarioController {
         private usuarioService: UsuarioService,
     ) {}
 
+    @Post('eliminar-usuario/:idUsuario')
+   async eliminarUsuario(
+        @Res() response,
+        @Param() parametrosRuta){
+        try {
+            await  this.usuarioService.eliminarUno(+parametrosRuta.idUsuario);
+            response.redirect('/usuario/lista-usuarios' + '?mensaje=Se elimino el usuario');
+        }catch (error){
+            console.error(error)
+            throw new InternalServerErrorException('Error')
+        }
+    }
+
+    @Post('crear-usuario-formulario')
+    async crearUsuarioFormulario(@Res() response, @Body() parametrosCuerpo) {
+        try {
+            const rerspuestaUsuario = await this.usuarioService.crearUno({
+                    nombre: parametrosCuerpo.nombre,
+                    apellido: parametrosCuerpo.apellido,});
+            response.redirect('/usuario/vista-crear' + '?mensaje= Se creo el usuario ' + parametrosCuerpo.nombre,);
+        }catch (error){
+            console.error(error);
+            throw new InternalServerErrorException('Error creando usuario')
+        }
+    }
+    @Get('vista-crear')
+    vistaCrear(@Res() response, @Query() parametrosConsulta) {
+        response.render('usuario/crear', {
+            datos: {
+                mensaje: parametrosConsulta.mensaje,
+            },
+
+        });
+    }
+
+
 
     @Get('inicio')
     inicio(@Res() response) {
@@ -32,8 +68,26 @@ export class UsuarioController {
     }
 
     @Get('lista-usuarios')
-    listaUsuarios(@Res() response) {
-        response.render('usuario/lista');
+    async listaUsuarios(@Res() response, @Query() parametrosConsulta) {
+        try{
+            //Validar parametros de consulta con un dto
+            const respuesta = await this.usuarioService.buscarMuchos({
+                skip: parametrosConsulta.skip ? +parametrosConsulta.skip : undefined ,
+                take: parametrosConsulta.take ? +parametrosConsulta.take : undefined ,
+                busqueda: parametrosConsulta.busqueda ? parametrosConsulta.busqueda : undefined,
+            });
+            console.log('-----------------------------');
+            console.log(respuesta);
+            response.render('usuario/lista',{
+                datos:{
+                    usuarios: respuesta,
+                    mensaje: parametrosConsulta.mensaje,
+                },
+            });
+        }catch (error) {
+            throw    new InternalServerErrorException('Error del servidor')
+        }
+
     }
 
 

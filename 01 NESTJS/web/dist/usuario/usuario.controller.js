@@ -22,11 +22,58 @@ let UsuarioController = class UsuarioController {
     constructor(usuarioService) {
         this.usuarioService = usuarioService;
     }
+    async eliminarUsuario(response, parametrosRuta) {
+        try {
+            await this.usuarioService.eliminarUno(+parametrosRuta.idUsuario);
+            response.redirect('/usuario/lista-usuarios' + '?mensaje=Se elimino el usuario');
+        }
+        catch (error) {
+            console.error(error);
+            throw new common_1.InternalServerErrorException('Error');
+        }
+    }
+    async crearUsuarioFormulario(response, parametrosCuerpo) {
+        try {
+            const rerspuestaUsuario = await this.usuarioService.crearUno({
+                nombre: parametrosCuerpo.nombre,
+                apellido: parametrosCuerpo.apellido,
+            });
+            response.redirect('/usuario/vista-crear' + '?mensaje= Se creo el usuario ' + parametrosCuerpo.nombre);
+        }
+        catch (error) {
+            console.error(error);
+            throw new common_1.InternalServerErrorException('Error creando usuario');
+        }
+    }
+    vistaCrear(response, parametrosConsulta) {
+        response.render('usuario/crear', {
+            datos: {
+                mensaje: parametrosConsulta.mensaje,
+            },
+        });
+    }
     inicio(response) {
         response.render('inicio');
     }
-    listaUsuarios(response) {
-        response.render('usuario/lista');
+    async listaUsuarios(response, parametrosConsulta) {
+        try {
+            const respuesta = await this.usuarioService.buscarMuchos({
+                skip: parametrosConsulta.skip ? +parametrosConsulta.skip : undefined,
+                take: parametrosConsulta.take ? +parametrosConsulta.take : undefined,
+                busqueda: parametrosConsulta.busqueda ? parametrosConsulta.busqueda : undefined,
+            });
+            console.log('-----------------------------');
+            console.log(respuesta);
+            response.render('usuario/lista', {
+                datos: {
+                    usuarios: respuesta,
+                    mensaje: parametrosConsulta.mensaje,
+                },
+            });
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException('Error del servidor');
+        }
     }
     obtenerUno(parametrosRuta) {
         return this.usuarioService.buscarUno(+parametrosRuta.idUsuario);
@@ -81,6 +128,30 @@ let UsuarioController = class UsuarioController {
     }
 };
 __decorate([
+    common_1.Post('eliminar-usuario/:idUsuario'),
+    __param(0, common_1.Res()),
+    __param(1, common_1.Param()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsuarioController.prototype, "eliminarUsuario", null);
+__decorate([
+    common_1.Post('crear-usuario-formulario'),
+    __param(0, common_1.Res()),
+    __param(1, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsuarioController.prototype, "crearUsuarioFormulario", null);
+__decorate([
+    common_1.Get('vista-crear'),
+    __param(0, common_1.Res()),
+    __param(1, common_1.Query()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], UsuarioController.prototype, "vistaCrear", null);
+__decorate([
     common_1.Get('inicio'),
     __param(0, common_1.Res()),
     __metadata("design:type", Function),
@@ -90,9 +161,10 @@ __decorate([
 __decorate([
     common_1.Get('lista-usuarios'),
     __param(0, common_1.Res()),
+    __param(1, common_1.Query()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "listaUsuarios", null);
 __decorate([
     common_1.Get(':idUsuario'),
