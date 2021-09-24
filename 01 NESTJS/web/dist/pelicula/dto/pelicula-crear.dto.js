@@ -28,9 +28,7 @@ __decorate([
     __metadata("design:type", String)
 ], peliculaCrearDto.prototype, "director", void 0);
 __decorate([
-    class_validator_1.IsNotEmpty(),
-    class_validator_1.IsNumber(),
-    class_validator_1.IsPositive(),
+    class_validator_1.IsInt(),
     __metadata("design:type", Number)
 ], peliculaCrearDto.prototype, "taquilla", void 0);
 __decorate([
@@ -45,4 +43,4 @@ __decorate([
     __metadata("design:type", Boolean)
 ], peliculaCrearDto.prototype, "cartelera", void 0);
 exports.peliculaCrearDto = peliculaCrearDto;
-//# sourceMappingURL=pelicula-crear.js.map
+//# sourceMappingURL=pelicula-crear.dto.js.map

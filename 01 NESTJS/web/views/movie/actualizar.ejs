@@ -1,18 +1,12 @@
-<%- include('../comunes/cabecera') %>
 
+<%- include('../comunes/cabecera') %>
 <div class="container">
 
-    <div class="container">
-        <%const existeMensaje = typeof  datos.mensaje !=  'undefined'%>
-        <%if(existeMensaje){%>
-            <div class="alert alert-success" role="alert">
-                <%= datos.mensaje%>
-            </div>
-        <%}%>
-    </div>
 
-    <h1>Crear Pelicula</h1>
-    <form action="/pelicula/crear-pelicula-formulario" method="post">
+
+    <h1>Actualizar Pelicula</h1>
+
+    <form action="/movie/actualizar-movie-formulario/<%=datos.pelicula.id%>" method="post">
 
 
         <div class="mb-3">
@@ -22,6 +16,7 @@
                    name="nombre"
                    class="form-control"
                    id="nombre"
+                   value="<%=datos.pelicula.nombre%>"
                    aria-describedby="ayudaNombre">
             <div id="ayudaNombre" class="form-text"> Ingrese el nombre. </div>
         </div>
@@ -34,6 +29,7 @@
                    name="director"
                    class="form-control"
                    id="director"
+                   value="<%=datos.pelicula.director%>"
                    aria-describedby="ayudaDirector">
             <div id="ayudaDirector" class="form-text"> Ingrese el nombre del director. </div>
         </div>
@@ -46,6 +42,7 @@
                    name="fechaEstreno"
                    class="form-control"
                    id="fechaEstreno"
+                   value="<%=datos.pelicula.fechaEstreno%>"
                    aria-describedby="ayudafechaEstreno">
             <div id="ayudafechaEstreno" class="form-text"> Ingrese la fecha de estreno. </div>
         </div>
@@ -53,32 +50,40 @@
 
 
 
-
-
         <div class="mb-3">
             <label for="taquilla" class="form-label"> Taquilla </label>
-            <input placeholder="Ej: 2000"
-                   type="text"
+            <input placeholder="Ej:10000.0"
+                   type="text" step="any"
                    name="taquilla"
                    class="form-control"
                    id="taquilla"
+                   value="<%=datos.pelicula.taquilla%>"
                    aria-describedby="ayudaTaquilla">
             <div id="ayudaTaquilla" class="form-text"> Ingrese la taquilla. </div>
         </div>
 
         <div class="mb-3">
-            <label><input type="checkbox" id="cartelera" name="cartelera"> Cartelera</label>
-            <div id="ayudaCartelera" class="form-text">Esta en cartelera</div>
+
+            <%if(datos.pelicula.cartelera == true){%>
+                <label><input type="checkbox" id="cartelera" name="cartelera" checked="checked"> Cartelera</label>
+                <div id="ayudaCartelera" class="form-text">Esta en cartelera</div>
+
+            <%}else{%>
+                <label><input type="checkbox" id="cartelera" name="cartelera"> Cartelera</label>
+                <div id="ayudaCartelera" class="form-text">Esta en cartelera</div>
+            <%}%>
+
+
         </div>
 
 
 
 
-        <button type="submit" class="btn btn-primary w-100">Crear</button>
+        <button type="submit" class="btn btn-primary w-100">Actualizar</button>
 
 
     </form>
 
-
 </div>
+
 <%- include('../comunes/footer') %>

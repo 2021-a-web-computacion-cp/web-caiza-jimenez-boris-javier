@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { PrismaService } from './prisma.service';
 import {UsuarioModule} from "./usuario/usuario.module";
 import {PeliculaModule} from "./pelicula/pelicula.module";
+import {MovieModule} from "./movie/movie.module";
 
 // DECORADOR -> Funciones
 @Module({
@@ -11,6 +12,7 @@ import {PeliculaModule} from "./pelicula/pelicula.module";
     // Modulos importados
       UsuarioModule,
       PeliculaModule,
+      MovieModule,
   ],
   controllers: [
     // Controladores de este modulo

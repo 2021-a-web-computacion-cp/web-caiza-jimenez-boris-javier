@@ -9,12 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PeliculaService = void 0;
-const common_1 = require("@nestjs/common");
+exports.MovieService = void 0;
 const prisma_service_1 = require("../prisma.service");
-let PeliculaService = class PeliculaService {
+const common_1 = require("@nestjs/common");
+let MovieService = class MovieService {
     constructor(prisma) {
         this.prisma = prisma;
+    }
+    buscarUno(id) {
+        return this.prisma.pelicula.findUnique({
+            where: {
+                id: id,
+            },
+        });
     }
     buscarMuchos(parametrosBusqueda) {
         const or = parametrosBusqueda.busqueda
@@ -23,21 +30,17 @@ let PeliculaService = class PeliculaService {
                     { nombre: { contains: parametrosBusqueda.busqueda } },
                     { director: { contains: parametrosBusqueda.busqueda } },
                 ],
-            } : {};
+            }
+            : {};
         return this.prisma.pelicula.findMany({
             where: or,
             take: Number(parametrosBusqueda.take) || undefined,
             skip: Number(parametrosBusqueda.skip) || undefined,
         });
     }
-    buscarUno(id) {
-        return this.prisma.pelicula.findUnique({
-            where: { id: id, },
-        });
-    }
-    crearUno(pelicula) {
+    crearUno(movie) {
         return this.prisma.pelicula.create({
-            data: pelicula,
+            data: movie,
         });
     }
     actualizarUno(parametrosActualizar) {
@@ -54,9 +57,9 @@ let PeliculaService = class PeliculaService {
         });
     }
 };
-PeliculaService = __decorate([
+MovieService = __decorate([
     common_1.Injectable(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService])
-], PeliculaService);
-exports.PeliculaService = PeliculaService;
-//# sourceMappingURL=pelicula.service.js.map
+], MovieService);
+exports.MovieService = MovieService;
+//# sourceMappingURL=movie.service.js.map

@@ -1,7 +1,7 @@
-export declare class peliculaCrearDto {
+export declare class MovieCrearDto {
     nombre: string;
     director: string;
-    taquilla: number;
     fechaEstreno: Date;
+    taquilla: number;
     cartelera: boolean;
 }

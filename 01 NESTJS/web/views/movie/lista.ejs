@@ -11,7 +11,7 @@
     <%}%>
 
 
-    <form action="/pelicula/lista-peliculas" method="get">
+    <form action="/movie/lista-movies" method="get">
         <div class="mb-3">
             <label for="busqueda" class="form-label"> Busqueda </label>
             <input placeholder="Ej: Interestellar"
@@ -26,7 +26,7 @@
     </form>
 
     <div>
-        <a href="/pelicula/vista-crear">
+        <a href="/movie/vista-crear">
             <button class="btn btn-success">Crear Nueva Pelicula</button>
         </a>
     </div>
@@ -56,7 +56,7 @@
             <th><%=objeto.fechaEstreno%></th>
 
             <th>
-                <form action="/pelicula/eliminar-pelicula/<%= objeto.id%>" method="post">
+                <form action="/movie/eliminar-movie/<%= objeto.id%>" method="post">
 
                     <button class="btn btn-danger">Eliminar</button>
 
@@ -65,16 +65,16 @@
 
 
             <th>
-                <form action="/pelicula/actualizar-pelicula/<%=objeto.id%>" method="post">
+                <form action="/movie/actualizar-movie/<%=objeto.id%>" method="post">
 
                     <button class="btn btn-dark">Actualizar</button>
 
                 </form>
             </th>
-            <%})%>
+
 
         </tr>
-
+        <%})%>
         </tbody>
     </table>
 </div>

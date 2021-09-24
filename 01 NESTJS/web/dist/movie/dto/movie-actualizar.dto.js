@@ -9,9 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.peliculaCrearDto = void 0;
+exports.MovieActualizarDto = void 0;
 const class_validator_1 = require("class-validator");
-class peliculaCrearDto {
+class MovieActualizarDto {
 }
 __decorate([
     class_validator_1.IsNotEmpty(),
@@ -19,30 +19,28 @@ __decorate([
     class_validator_1.MinLength(2),
     class_validator_1.MaxLength(25),
     __metadata("design:type", String)
-], peliculaCrearDto.prototype, "nombre", void 0);
+], MovieActualizarDto.prototype, "nombre", void 0);
 __decorate([
     class_validator_1.IsNotEmpty(),
     class_validator_1.IsString(),
     class_validator_1.MinLength(2),
     class_validator_1.MaxLength(25),
     __metadata("design:type", String)
-], peliculaCrearDto.prototype, "director", void 0);
+], MovieActualizarDto.prototype, "director", void 0);
+__decorate([
+    class_validator_1.IsNotEmpty(),
+    class_validator_1.IsDate(),
+    __metadata("design:type", Date)
+], MovieActualizarDto.prototype, "fechaEstreno", void 0);
 __decorate([
     class_validator_1.IsNotEmpty(),
     class_validator_1.IsNumber(),
     class_validator_1.IsPositive(),
     __metadata("design:type", Number)
-], peliculaCrearDto.prototype, "taquilla", void 0);
+], MovieActualizarDto.prototype, "taquilla", void 0);
 __decorate([
-    class_validator_1.IsNotEmpty(),
-    class_validator_1.IsDate(),
-    __metadata("design:type", Date)
-], peliculaCrearDto.prototype, "fechaEstreno", void 0);
-__decorate([
-    class_validator_1.IsOptional(),
     class_validator_1.IsBoolean(),
-    class_validator_1.IsNumber(),
     __metadata("design:type", Boolean)
-], peliculaCrearDto.prototype, "cartelera", void 0);
-exports.peliculaCrearDto = peliculaCrearDto;
-//# sourceMappingURL=pelicula-crear.js.map
+], MovieActualizarDto.prototype, "cartelera", void 0);
+exports.MovieActualizarDto = MovieActualizarDto;
+//# sourceMappingURL=movie-actualizar.dto.js.map

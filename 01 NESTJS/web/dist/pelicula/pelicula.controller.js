@@ -15,28 +15,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PeliculaController = void 0;
 const common_1 = require("@nestjs/common");
 const pelicula_service_1 = require("./pelicula.service");
+const class_validator_1 = require("class-validator");
+const json_1 = require("ts-jest/dist/utils/json");
+const pelicula_crear_dto_1 = require("../pelicula/dto/pelicula-crear.dto");
 let PeliculaController = class PeliculaController {
     constructor(peliculaService) {
         this.peliculaService = peliculaService;
     }
-    async actualizarUno(response, parametrosRuta, parametrosCuerpo) {
-        const pelicula = {
-            nombre: parametrosCuerpo.nombre,
-            director: parametrosCuerpo.director,
-            taquilla: parseFloat(parametrosCuerpo.taquilla),
-            cartelera: !!(parametrosCuerpo.cartelera),
-        };
-        const parametrosActualizar = {
-            id: Number(parametrosRuta.idPelicula),
-            data: pelicula,
-        };
+    async eliminarUsuario(response, parametrosRuta) {
         try {
-            await this.peliculaService.actualizarUno(parametrosActualizar);
-            response.redirect('/pelicula/lista-peliculas');
+            await this.peliculaService.eliminarUno(+parametrosRuta.idPelicula);
+            response.redirect('/pelicula/lista-peliculas' + '?mensaje=Se elimino la pelicula');
         }
         catch (error) {
-            console.log({ error: error, mensaje: 'Errores en crear pelicula' });
-            throw new common_1.InternalServerErrorException("Error del servidor");
+            console.error(error);
+            throw new common_1.InternalServerErrorException('Error');
         }
     }
     async obtenerUno(response, parametrosRuta) {
@@ -55,14 +48,25 @@ let PeliculaController = class PeliculaController {
             throw new common_1.InternalServerErrorException('Error');
         }
     }
-    async eliminarUsuario(response, parametrosRuta) {
+    async actualizarUno(response, parametrosRuta, parametrosCuerpo) {
+        const pelicula = {
+            nombre: parametrosCuerpo.nombre,
+            director: parametrosCuerpo.director,
+            fechaEstreno: new Date(parametrosCuerpo.fechaEstreno),
+            taquilla: parseFloat(parametrosCuerpo.taquilla),
+            cartelera: !!(parametrosCuerpo.cartelera),
+        };
+        const parametrosActualizar = {
+            id: Number(parametrosRuta.idPelicula),
+            data: pelicula,
+        };
         try {
-            await this.peliculaService.eliminarUno(+parametrosRuta.idPelicula);
-            response.redirect('/pelicula/lista-peliculas' + '?mensaje=Se elimino la pelicula');
+            await this.peliculaService.actualizarUno(parametrosActualizar);
+            response.redirect('/pelicula/lista-peliculas');
         }
         catch (error) {
-            console.error(error);
-            throw new common_1.InternalServerErrorException('Error');
+            console.log({ error: error, mensaje: 'Errores en crear pelicula' });
+            throw new common_1.InternalServerErrorException("Error del servidor");
         }
     }
     vistaCrear(response, parametrosConsulta) {
@@ -73,14 +77,22 @@ let PeliculaController = class PeliculaController {
         });
     }
     async crearUsuarioFormulario(response, parametrosCuerpo) {
+        const peliculaDto = new pelicula_crear_dto_1.peliculaCrearDto();
+        peliculaDto.nombre = parametrosCuerpo.nombre;
+        peliculaDto.director = parametrosCuerpo.director;
+        peliculaDto.fechaEstreno = new Date(parametrosCuerpo.fechaEstreno);
+        peliculaDto.taquilla = +parametrosCuerpo.taquilla;
+        peliculaDto.cartelera = !!(parametrosCuerpo.cartelera);
         try {
-            const rerspuestaUsuario = await this.peliculaService.crearUno({
-                nombre: parametrosCuerpo.nombre,
-                director: parametrosCuerpo.director,
-                taquilla: parseFloat(parametrosCuerpo.taquilla),
-                cartelera: !!(parametrosCuerpo.cartelera)
-            });
-            response.redirect('/pelicula/vista-crear' + '?mensaje= Se creo la pelicula ' + parametrosCuerpo.nombre);
+            const errores = await class_validator_1.validate(peliculaDto);
+            if (errores.length > 0) {
+                console.log(JSON, json_1.stringify(errores));
+                throw new common_1.BadRequestException("No envía bien parametros");
+            }
+            else {
+                return this.peliculaService.crearUno(peliculaDto);
+                response.redirect('/pelicula/vista-crear' + '?mensaje= Se creo la pelicula ' + parametrosCuerpo.nombre);
+            }
         }
         catch (error) {
             console.error(error);
@@ -109,14 +121,13 @@ let PeliculaController = class PeliculaController {
     }
 };
 __decorate([
-    common_1.Post('actualizar-pelicula-formulario/:idPelicula'),
+    common_1.Post('eliminar-pelicula/:idPelicula'),
     __param(0, common_1.Res()),
     __param(1, common_1.Param()),
-    __param(2, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
-], PeliculaController.prototype, "actualizarUno", null);
+], PeliculaController.prototype, "eliminarUsuario", null);
 __decorate([
     common_1.Post(':actualizar-pelicula/:idPelicula'),
     __param(0, common_1.Res()),
@@ -126,13 +137,14 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PeliculaController.prototype, "obtenerUno", null);
 __decorate([
-    common_1.Post('eliminar-pelicula/:idPelicula'),
+    common_1.Post('actualizar-pelicula-formulario/:idPelicula'),
     __param(0, common_1.Res()),
     __param(1, common_1.Param()),
+    __param(2, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
-], PeliculaController.prototype, "eliminarUsuario", null);
+], PeliculaController.prototype, "actualizarUno", null);
 __decorate([
     common_1.Get('vista-crear'),
     __param(0, common_1.Res()),
