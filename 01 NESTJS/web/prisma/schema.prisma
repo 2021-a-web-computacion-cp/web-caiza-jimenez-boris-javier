@@ -27,3 +27,16 @@ model Mascota{
 
 }
 
+model Pelicula{
+
+   id               Int         @id @default(autoincrement())
+   nombre           String
+   director          String
+   fechaEstreno     DateTime    @default(now())
+   taquilla         Float
+   cartelera        Boolean
+
+}
+
+
+

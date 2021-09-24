@@ -6,32 +6,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.PeliculaModule = void 0;
 const common_1 = require("@nestjs/common");
-const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
-const prisma_service_1 = require("./prisma.service");
-const usuario_module_1 = require("./usuario/usuario.module");
-const pelicula_module_1 = require("./pelicula/pelicula.module");
-let AppModule = class AppModule {
+const prisma_service_1 = require("../prisma.service");
+const pelicula_service_1 = require("../pelicula/pelicula.service");
+const pelicula_controller_1 = require("../pelicula/pelicula.controller");
+let PeliculaModule = class PeliculaModule {
 };
-AppModule = __decorate([
+PeliculaModule = __decorate([
     common_1.Module({
-        imports: [
-            usuario_module_1.UsuarioModule,
-            pelicula_module_1.PeliculaModule,
-        ],
-        controllers: [
-            app_controller_1.AppController,
-        ],
+        imports: [],
         providers: [
-            app_service_1.AppService,
+            pelicula_service_1.PeliculaService,
             prisma_service_1.PrismaService,
         ],
         exports: [
-            app_service_1.AppService,
+            pelicula_service_1.PeliculaService,
+        ],
+        controllers: [
+            pelicula_controller_1.PeliculaController,
         ],
     })
-], AppModule);
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+], PeliculaModule);
+exports.PeliculaModule = PeliculaModule;
+//# sourceMappingURL=pelicula.module.js.map

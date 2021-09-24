@@ -1,0 +1,81 @@
+<%- include('../comunes/cabecera') %>
+
+<div class='container'>
+    <h1>Lista</h1>
+
+    <%const existeMensaje = typeof  datos.mensaje !=  'undefined'%>
+    <%if(existeMensaje){%>
+        <div class="alert alert-danger" role="alert">
+            <%= datos.mensaje%>
+        </div>
+    <%}%>
+
+
+    <form action="/pelicula/lista-peliculas" method="get">
+        <div class="mb-3">
+            <label for="busqueda" class="form-label"> Busqueda </label>
+            <input placeholder="Ej: Interestellar"
+                   type="text"
+                   name="busqueda"
+                   class="form-control"
+                   id="busqueda"
+                   aria-describedby="ayudaBusqueda">
+            <div id="ayudaBusqueda" class="form-text"> Puede buscar por nombre, director, taquilla, cartelera y fecha de estreno. </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    </form>
+
+    <div>
+        <a href="/pelicula/vista-crear">
+            <button class="btn btn-success">Crear Nueva Pelicula</button>
+        </a>
+    </div>
+
+
+
+    <table class="table text-center">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Director</th>
+            <th scope="col">Taquilla</th>
+            <th scope="col">Cartelera</th>
+            <th scope="col">Fecha De Estreno</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <%datos.peliculas.forEach((objeto) =>{%>
+        <tr>
+            <th><%=objeto.id%></th>
+            <th><%=objeto.nombre%></th>
+            <th><%=objeto.director%></th>
+            <th><%=objeto.taquilla%></th>
+            <th><%=objeto.cartelera%></th>
+            <th><%=objeto.fechaEstreno%></th>
+
+            <th>
+                <form action="/pelicula/eliminar-pelicula/<%= objeto.id %>" method="post">
+
+                    <button class="btn btn-danger">Eliminar</button>
+
+                </form>
+            </th>
+
+
+            <th>
+                <form action="/pelicula/actualizar-pelicula/<%=objeto.id%>" method="post">
+
+                    <button class="btn btn-dark">Actualizar</button>
+
+                </form>
+            </th>
+            <%})%>
+
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<%- include('../comunes/footer') %>

@@ -1,0 +1,69 @@
+<%- include('../comunes/cabecera') %>
+
+<div class="container">
+
+    <div class="container">
+        <%const existeMensaje = typeof  datos.mensaje !=  'undefined'%>
+        <%if(existeMensaje){%>
+            <div class="alert alert-success" role="alert">
+                <%= datos.mensaje%>
+            </div>
+        <%}%>
+    </div>
+
+    <h1>Crear Pelicula</h1>
+    <form action="/pelicula/crear-pelicula-formulario" method="post">
+
+
+        <div class="mb-3">
+            <label for="nombre" class="form-label"> Nombre </label>
+            <input placeholder="Ej: Boris"
+                   type="text"
+                   name="nombre"
+                   class="form-control"
+                   id="nombre"
+                   aria-describedby="ayudaNombre">
+            <div id="ayudaNombre" class="form-text"> Ingrese el nombre. </div>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="director" class="form-label"> Director </label>
+            <input placeholder="Ej: Caiza"
+                   type="text"
+                   name="director"
+                   class="form-control"
+                   id="director"
+                   aria-describedby="ayudaDirector">
+            <div id="ayudaDirector" class="form-text"> Ingrese el nombre del director. </div>
+        </div>
+
+
+
+        <div class="mb-3">
+            <label for="taquilla" class="form-label"> Taquilla </label>
+            <input placeholder="Ej: Martin Scorsece"
+                   type="number" step="any"
+                   name="taquilla"
+                   class="form-control"
+                   id="taquilla"
+                   aria-describedby="ayudaTaquilla">
+            <div id="ayudaTaquilla" class="form-text"> Ingrese la taquilla. </div>
+        </div>
+
+        <div class="mb-3">
+            <label><input type="checkbox" id="cartelera" name="cartelera"> Cartelera</label>
+            <div id="ayudaCartelera" class="form-text">Esta en cartelera</div>
+        </div>
+
+
+
+
+        <button type="submit" class="btn btn-primary w-100">Crear</button>
+
+
+    </form>
+
+
+</div>
+<%- include('../comunes/footer') %>
