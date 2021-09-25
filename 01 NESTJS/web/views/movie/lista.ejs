@@ -61,7 +61,7 @@
             <th><%=objeto.director%></th>
             <th><%=objeto.taquilla%></th>
             <th><%=objeto.cartelera%></th>
-            <th><%=objeto.fechaEstreno%></th>
+            <th><%=objeto.fechaEstreno.toDateString()%></th>
 
             <th>
                 <form action="/movie/eliminar-movie/<%= objeto.id%>" method="post">
