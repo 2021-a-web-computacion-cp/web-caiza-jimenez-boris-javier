@@ -22,9 +22,6 @@ let MovieController = class MovieController {
     constructor(movieService) {
         this.movieService = movieService;
     }
-    inicio(response) {
-        response.render('inicio');
-    }
     async listaLibros(response, parametrosConsulta) {
         try {
             const respuesta = await this.movieService.buscarMuchos({
@@ -63,6 +60,8 @@ let MovieController = class MovieController {
         try {
             const errores = await class_validator_1.validate(movieCrearDto);
             if (errores.length > 0) {
+                response.redirect('/movie/vista-crear' +
+                    '?mensaje= Se ha ingresado mal los datos, por favor revicelos');
                 console.log(JSON, json_1.stringify(errores));
                 throw new common_1.BadRequestException('No envia bien parametros: ');
             }
@@ -113,9 +112,9 @@ let MovieController = class MovieController {
         movieActualizarDto.cartelera = !!(parametrosCuerpo.cartelera);
         try {
             const errores = await class_validator_1.validate(movieActualizarDto);
-            response.redirect('/movie/actualizar-movie/' + parametrosRuta.idMovie);
             if (errores.length > 0) {
-                response.redirect('/movie/actualizar-movie/' + parametrosRuta.idMovie);
+                response.redirect('/movie/lista-movies' +
+                    '?mensaje=No se ha actualizado los datos, dado que estos han sido incorrectos');
                 console.log(JSON, json_1.stringify(errores));
                 throw new common_1.BadRequestException('No envia bien parametros: ');
             }
@@ -130,18 +129,10 @@ let MovieController = class MovieController {
             }
         }
         catch (error) {
-            response.redirect('/movie/actualizar-movie/' + parametrosRuta.idMovie);
-            throw new common_1.InternalServerErrorException('Error actualizando pelicuka');
+            throw new common_1.InternalServerErrorException('Error actualizando libro');
         }
     }
 };
-__decorate([
-    common_1.Get('inicio'),
-    __param(0, common_1.Res()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], MovieController.prototype, "inicio", null);
 __decorate([
     common_1.Get('lista-movies'),
     __param(0, common_1.Res()),

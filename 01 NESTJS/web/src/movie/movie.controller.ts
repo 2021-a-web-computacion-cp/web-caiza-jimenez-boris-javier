@@ -22,10 +22,6 @@ export  class MovieController{
         private movieService: MovieService,
     ) {}
 
-    @Get('inicio')
-    inicio(@Res() response) {
-        response.render('inicio');
-    }
 
     @Get('lista-movies')
     async listaLibros(@Res() response, @Query() parametrosConsulta) {
@@ -71,10 +67,16 @@ export  class MovieController{
         movieCrearDto.cartelera = !!(parametrosCuerpo.cartelera);
 
         try {
+
             const errores = await validate(movieCrearDto);
             if (errores.length > 0 ) {
+                response.redirect(
+                    '/movie/vista-crear' +
+                    '?mensaje= Se ha ingresado mal los datos, por favor revicelos'
+                );
                 console.log(JSON,stringify(errores));
                 throw new BadRequestException('No envia bien parametros: ');
+
             } else {
                 await this.movieService.crearUno(movieCrearDto);
                 response.redirect(
@@ -86,6 +88,7 @@ export  class MovieController{
         } catch (error) {
             console.error(error);
             throw new InternalServerErrorException('Error creando libro');
+
         }
     }
 
@@ -140,7 +143,10 @@ export  class MovieController{
             const errores = await validate(movieActualizarDto);
 
             if (errores.length > 0) {
-                
+                response.redirect(
+                    '/movie/lista-movies' +
+                    '?mensaje=No se ha actualizado los datos, dado que estos han sido incorrectos'
+                );
                 console.log(JSON,stringify(errores));
                 throw new BadRequestException('No envia bien parametros: ');
 

@@ -32,5 +32,6 @@ export class MovieCrearDto {
     taquilla: number;
 
     @IsBoolean()
+    @IsOptional()
     cartelera: boolean;
 }

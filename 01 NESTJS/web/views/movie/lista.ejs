@@ -5,9 +5,15 @@
 
     <%const existeMensaje = typeof  datos.mensaje !=  'undefined'%>
     <%if(existeMensaje){%>
+        <%if(datos.mensaje =='Se elimino la pelicula' || datos.mensaje == 'No se ha actualizado los datos, dado que estos han sido incorrectos'){%>
         <div class="alert alert-danger" role="alert">
             <%= datos.mensaje%>
         </div>
+    <%}else{%>
+        <div class="alert alert-success" role="alert">
+            <%= datos.mensaje%>
+        </div>
+    <%}%>
     <%}%>
 
 
@@ -20,7 +26,7 @@
                    class="form-control"
                    id="busqueda"
                    aria-describedby="ayudaBusqueda">
-            <div id="ayudaBusqueda" class="form-text"> Puede buscar por nombre, director, taquilla, cartelera y fecha de estreno. </div>
+            <div id="ayudaBusqueda" class="form-text"> Puede buscar por nombre y director de la pelicula. </div>
         </div>
         <button type="submit" class="btn btn-primary w-100">Buscar</button>
     </form>
@@ -42,6 +48,8 @@
             <th scope="col">Taquilla</th>
             <th scope="col">Cartelera</th>
             <th scope="col">Fecha De Estreno</th>
+            <th scope="col">Eliminar</th>
+            <th scope="col">Editar</th>
         </tr>
         </thead>
         <tbody>

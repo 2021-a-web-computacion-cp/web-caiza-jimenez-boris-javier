@@ -2,7 +2,6 @@ import { MovieService } from "./movie.service";
 export declare class MovieController {
     private movieService;
     constructor(movieService: MovieService);
-    inicio(response: any): void;
     listaLibros(response: any, parametrosConsulta: any): Promise<void>;
     vistaCrear(response: any, parametrosConsulta: any): void;
     crearUsuarioFormualrio(response: any, parametrosCuerpo: any): Promise<void>;

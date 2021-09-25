@@ -40,6 +40,7 @@ __decorate([
 ], MovieActualizarDto.prototype, "taquilla", void 0);
 __decorate([
     class_validator_1.IsBoolean(),
+    class_validator_1.IsOptional(),
     __metadata("design:type", Boolean)
 ], MovieActualizarDto.prototype, "cartelera", void 0);
 exports.MovieActualizarDto = MovieActualizarDto;

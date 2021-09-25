@@ -5,11 +5,20 @@
     <div class="container">
         <%const existeMensaje = typeof  datos.mensaje !=  'undefined'%>
         <%if(existeMensaje){%>
+
+            <%if(datos.mensaje ==' Se ha ingresado mal los datos, por favor revicelos'){%>
+            <div class="alert alert-danger" role="alert">
+                <%= datos.mensaje%>
+            </div>
+        <%}else{%>
             <div class="alert alert-success" role="alert">
                 <%= datos.mensaje%>
             </div>
+            <%}%>
         <%}%>
     </div>
+
+
 
     <h1>Crear Pelicula</h1>
     <form action="/movie/crear-movie-formulario" method="post">

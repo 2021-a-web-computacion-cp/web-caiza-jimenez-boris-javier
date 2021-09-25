@@ -1,4 +1,14 @@
-import {IsBoolean, IsDate, IsNotEmpty, IsNumber, IsPositive, IsString, MaxLength, MinLength} from "class-validator";
+import {
+    IsBoolean,
+    IsDate,
+    IsNotEmpty,
+    IsNumber,
+    IsOptional,
+    IsPositive,
+    IsString,
+    MaxLength,
+    MinLength
+} from "class-validator";
 
 export class MovieActualizarDto{
     @IsNotEmpty() //Requericdo
@@ -23,5 +33,6 @@ export class MovieActualizarDto{
     taquilla: number;
 
     @IsBoolean()
+    @IsOptional()
     cartelera: boolean;
 }
