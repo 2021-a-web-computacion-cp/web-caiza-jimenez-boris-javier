@@ -5,7 +5,7 @@ import {
     IsNumber,
     IsOptional,
     IsPositive,
-    IsString,
+    IsString, Max,
     MaxLength,
     MinLength
 } from "class-validator";
@@ -30,6 +30,7 @@ export class MovieActualizarDto{
     @IsNotEmpty() //Requericdo
     @IsNumber()
     @IsPositive()
+    @Max(10000000000)
     taquilla: number;
 
     @IsBoolean()

@@ -42,9 +42,10 @@
                    name="fechaEstreno"
                    class="form-control"
                    id="fechaEstreno"
-                   value="<%=datos.pelicula.fechaEstreno.getDay() + "/"+ datos.pelicula.fechaEstreno.getMonth() + "/" + datos.pelicula.fechaEstreno.getFullYear()%>"
+                   value="<%=(datos.pelicula.fechaEstreno.getDate()+1) + "-0"+ (datos.pelicula.fechaEstreno.getMonth()+1) + "-" + datos.pelicula.fechaEstreno.getFullYear()%>"
                    aria-describedby="ayudafechaEstreno">
             <div id="ayudafechaEstreno" class="form-text"> Ingrese la fecha de estreno. </div>
+            <%console.log((datos.pelicula.fechaEstreno.getDate()+1) + "-0"+ (datos.pelicula.fechaEstreno.getMonth()+1) + "-" + datos.pelicula.fechaEstreno.getFullYear())%>
         </div>
 
 

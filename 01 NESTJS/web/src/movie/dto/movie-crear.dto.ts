@@ -6,7 +6,7 @@ import {
     MaxLength,
     MinLength,
     IsNumber,
-    IsPositive, IsDate, IsBoolean,
+    IsPositive, IsDate, IsBoolean, Max,
 } from 'class-validator';
 
 export class MovieCrearDto {
@@ -29,6 +29,7 @@ export class MovieCrearDto {
     @IsNotEmpty() //Requericdo
     @IsNumber()
     @IsPositive()
+    @Max(10000000000)
     taquilla: number;
 
     @IsBoolean()

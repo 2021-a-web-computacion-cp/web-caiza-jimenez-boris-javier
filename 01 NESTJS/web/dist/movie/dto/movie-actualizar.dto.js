@@ -36,6 +36,7 @@ __decorate([
     class_validator_1.IsNotEmpty(),
     class_validator_1.IsNumber(),
     class_validator_1.IsPositive(),
+    class_validator_1.Max(10000000000),
     __metadata("design:type", Number)
 ], MovieActualizarDto.prototype, "taquilla", void 0);
 __decorate([

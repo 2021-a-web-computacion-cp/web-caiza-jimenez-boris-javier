@@ -3,6 +3,7 @@
 <div class='container'>
     <h1>Lista</h1>
 
+
     <%const existeMensaje = typeof  datos.mensaje !=  'undefined'%>
     <%if(existeMensaje){%>
         <%if(datos.mensaje =='Se elimino la pelicula' || datos.mensaje == 'No se ha actualizado los datos, dado que estos han sido incorrectos'){%>
@@ -61,7 +62,7 @@
             <th><%=objeto.director%></th>
             <th><%=objeto.taquilla%></th>
             <th><%=objeto.cartelera%></th>
-            <th><%=objeto.fechaEstreno.getDay() + "/" + objeto.fechaEstreno.getMonth() + "/" + objeto.fechaEstreno.getFullYear()%></th>
+            <th><%=(objeto.fechaEstreno.getDate()+1)+ "/" + (objeto.fechaEstreno.getMonth()+1) + "/" + objeto.fechaEstreno.getFullYear()%></th>
 
             <th>
                 <form action="/movie/eliminar-movie/<%= objeto.id%>" method="post">
