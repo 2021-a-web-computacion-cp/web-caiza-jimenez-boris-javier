@@ -42,7 +42,7 @@
                    name="fechaEstreno"
                    class="form-control"
                    id="fechaEstreno"
-                   value="<%=datos.pelicula.fechaEstreno%>"
+                   value="<%=datos.pelicula.fechaEstreno.getDay() + "/"+ datos.pelicula.fechaEstreno.getMonth() + "/" + datos.pelicula.fechaEstreno.getFullYear()%>"
                    aria-describedby="ayudafechaEstreno">
             <div id="ayudafechaEstreno" class="form-text"> Ingrese la fecha de estreno. </div>
         </div>
@@ -70,7 +70,7 @@
 
             <%}else{%>
                 <label><input type="checkbox" id="cartelera" name="cartelera"> Cartelera</label>
-                <div id="ayudaCartelera" class="form-text">Esta en cartelera</div>
+                <div id="ayudaCartelera" class="form-text">¿Esta en cartelera?</div>
             <%}%>
 
 
